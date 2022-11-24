@@ -1,1 +1,2 @@
-# learn_rust
+# Personal Repo
+To learn Rust

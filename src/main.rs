@@ -3,7 +3,7 @@ use std::io;
 fn main() {
     let mut count = 0;
     let mut len = String::new();
-    let mut n1 = 0;
+    let mut n1;
     let mut n2 = 1;
     let mut next_number = 0;
     let mut a: [i32; 100] = [0; 100];

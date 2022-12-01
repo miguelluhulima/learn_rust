@@ -1,29 +1,33 @@
-use std::io;
-use rand::Rng;
-use std::cmp::Ordering;
-
 fn main() {
-    println!("Guess the number!");
+    let my_string = String::from("hello world");
 
-    let secret_number = rand::thread_rng().gen_range(1..=100);
+    let word = first_word(&my_string[0..6]);
+    println!("{}", word);
+    let word = first_word(&my_string[..]);
+    println!("{}", word);
+    
+    let word = first_word(&my_string);
+    println!("{}", word);
+    
+    let my_string_literal = "hello world";
+    
+    let word = first_word(&my_string_literal[0..6]);
+    println!("{}", word);
+    let word = first_word(&my_string_literal[..]);
+    println!("{}", word);
+    
+    let word = first_word(my_string_literal);
+    println!("{}", word);
+}
 
-    println!("The secret number is: {secret_number}");
+fn first_word(s: &str) -> &str {
+    let bytes = s.as_bytes();
 
-    println!("Please input your guess.");
-
-    let mut guess = String::new();
-
-    io::stdin()
-        .read_line(&mut guess)
-        .expect("Failed to read line");
-
-    let guess: u32 = guess.trim().parse().expect("Please type a number!");
-
-    println!("You guessed: {guess}");
-
-    match guess.cmp(&secret_number) {
-        Ordering::Less => println!("Too small!"),
-        Ordering::Greater => println!("Too big!"),
-        Ordering::Equal => println!("You win!")
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
     }
+
+    &s[..]
 }
